@@ -18,8 +18,11 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_settings">Settings</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_logout">Выход</string>
+    <string name="action_profile">Профайл</string>
+    <string name="title_activity_settings">Настройки</string>
+
 
     <!-- Strings related to Settings -->
 
