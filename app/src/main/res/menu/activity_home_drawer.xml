@@ -7,19 +7,19 @@
         <item
                 android:id="@+id/nav_profile"
                 android:icon="@drawable/ic_menu_camera"
-                android:title="Профайл"/>
+                android:title="@string/menu_profile"/>
         <item
                 android:id="@+id/nav_journals"
                 android:icon="@drawable/ic_menu_gallery"
-                android:title="Журналы"/>
+                android:title="@string/menu_journal"/>
         <item
-                android:id="@+id/nav_addrecord"
+                android:id="@+id/nav_add_record"
                 android:icon="@drawable/ic_menu_slideshow"
-                android:title="Добавить запись"/>
+                android:title="@string/menu_add_record"/>
         <item
                 android:id="@+id/nav_manage"
                 android:icon="@drawable/ic_menu_manage"
-                android:title="Настройки"/>
+                android:title="@string/menu_settings"/>
     </group>
 
     <item android:title="Communicate">
@@ -27,11 +27,11 @@
             <item
                     android:id="@+id/nav_share"
                     android:icon="@drawable/ic_menu_share"
-                    android:title="Поделиться"/>
+                    android:title="@string/menu_share"/>
             <item
                     android:id="@+id/nav_send"
                     android:icon="@drawable/ic_menu_send"
-                    android:title="Отправить"/>
+                    android:title="@string/menu_send"/>
         </menu>
     </item>
 

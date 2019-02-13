@@ -23,7 +23,7 @@ android {
     }
     sourceSets {
         main {
-            java.srcDirs = ['src/main/java', 'src/main/java/com.fourseasonsweb.fs/Journal', 'src/main/java/com/fourseasonsweb/fs/Journal', 'src/main/java/com/fourseasonsweb/fs/Profile', 'src/main/java/com/fourseasonsweb/fs/Record']
+            java.srcDirs = ['src/main/java', 'src/main/java/com.fourseasonsweb.fs/Journal', 'src/main/java/com/fourseasonsweb/fs/Journal', 'src/main/java/com/fourseasonsweb/fs/Profile', 'src/main/java/com/fourseasonsweb/fs/Record', 'src/main/java/com/fourseasonsweb/fs/Network', 'src/main/java/com/fourseasons/fs/Data', 'src/main/java/com/fourseasonsweb/fs/Data']
         }
     }
 }
@@ -49,7 +49,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-
     // Rx
     implementation 'io.reactivex.rxjava2:rxjava:2.1.2'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -61,4 +60,14 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
     implementation 'com.github.bumptech.glide:glide:4.2.0'
+
+    // Dependency Injection
+    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
+    implementation "com.google.dagger:dagger:${daggerVersion}"
+    compileOnly 'javax.annotation:jsr250-api:1.0'
+
+    // Retrofit 2
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.3.0'
 }
