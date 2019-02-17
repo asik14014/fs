@@ -21,8 +21,12 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.fourseasonsweb.fs.Network.AccountingApiService
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
+import javax.inject.Inject
+
+
 
 /**
  * A login screen that offers login via email/password.
@@ -32,6 +36,9 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private var mAuthTask: UserLoginTask? = null
+
+    @Inject
+    lateinit var api: AccountingApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +54,12 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         })
 
         email_sign_in_button.setOnClickListener { attemptLogin() }
+
+        injectDependency()
+    }
+
+    private fun injectDependency() {
+        (application as BaseApplication).getApplicationComponent().inject(this)
     }
 
     private fun populateAutoComplete() {
@@ -252,23 +265,12 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         AsyncTask<Void, Void, Boolean>() {
 
         override fun doInBackground(vararg params: Void): Boolean? {
-            // TODO: attempt authentication against a network service.
+            //call login
+            val response = api.login(mEmail, mPassword)
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000)
-            } catch (e: InterruptedException) {
-                return false
-            }
 
-            return DUMMY_CREDENTIALS
-                .map { it.split(":") }
-                .firstOrNull { it[0] == mEmail }
-                ?.let {
-                    // Account exists, return true if the password matches.
-                    it[1] == mPassword
-                }
-                ?: true
+
+            return true
         }
 
         override fun onPostExecute(success: Boolean?) {
@@ -295,11 +297,5 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
          * Id to identity READ_CONTACTS permission request.
          */
         private val REQUEST_READ_CONTACTS = 0
-
-        /**
-         * A dummy authentication store containing known user names and passwords.
-         * TODO: remove after connecting to a real authentication system.
-         */
-        private val DUMMY_CREDENTIALS = arrayOf("foo@example.com:hello", "bar@example.com:world")
     }
 }

@@ -42,7 +42,7 @@ class NetworkModule {
     @Provides
     internal fun retrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.API_BASE_URL)
+            .baseUrl(BuildConfig.FS_BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
@@ -51,7 +51,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    internal fun tmdbWebService(retrofit: Retrofit): AccountingApiService {
+    internal fun fsWebService(retrofit: Retrofit): AccountingApiService {
         return retrofit.create(AccountingApiService::class.java)
     }
 
