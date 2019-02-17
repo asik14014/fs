@@ -1,14 +1,12 @@
 package com.fourseasonsweb.fs.Data
 
-import java.util.*
-
 class User {
     private var Id: Int = 0
     private var UserName: String? = null
     private var FirstName: String? = null
     private var LastName: String? = null
     private var Type: Int = -1
-    private var Registration: Date? = null
+    //private var Registration: Date? = null
     private var PhoneNumber: String? = null
     private var Email: String? = null
     private var Password: String? = null
@@ -71,13 +69,14 @@ class User {
         this.Type = value
     }
 
-    fun getRegistration(): Int {
-        return Type
-    }
 
-    fun setRegistration(value: Date) {
-        this.Registration = value
-    }
+    //fun getRegistration(): Date? {
+//        return Registration
+  //  }
+
+    //fun setRegistration(value: Date) {
+      //  this.Registration = value
+    //}
 
     fun getPhone(): String? {
         return PhoneNumber

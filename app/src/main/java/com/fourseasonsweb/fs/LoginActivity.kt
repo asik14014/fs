@@ -21,17 +21,28 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.fourseasonsweb.fs.Data.User
 import com.fourseasonsweb.fs.Network.AccountingApiService
 import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 import javax.inject.Inject
-
 
 
 /**
  * A login screen that offers login via email/password.
  */
-class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
+class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<User> {
+    override fun onFailure(call: Call<User>, t: Throwable) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onResponse(call: Call<User>, response: Response<User>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -149,6 +160,9 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true)
+
+            val call = api.login(emailStr, passwordStr)
+            call.enqueue(this);
             mAuthTask = UserLoginTask(emailStr, passwordStr)
             mAuthTask!!.execute(null as Void?)
         }
@@ -257,19 +271,11 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         val IS_PRIMARY = 1
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
+    //TODO Убрать этот участок
     inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) :
         AsyncTask<Void, Void, Boolean>() {
 
         override fun doInBackground(vararg params: Void): Boolean? {
-            //call login
-            val response = api.login(mEmail, mPassword)
-
-
-
             return true
         }
 

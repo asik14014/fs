@@ -18,13 +18,13 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    internal fun requestInterceptor(interceptor: RequestInterceptor): Interceptor {
+    fun requestInterceptor(interceptor: RequestInterceptor): Interceptor {
         return interceptor
     }
 
     @Provides
     @Singleton
-    internal fun provideOkHttpClient(requestInterceptor: RequestInterceptor): OkHttpClient {
+    fun provideOkHttpClient(requestInterceptor: RequestInterceptor): OkHttpClient {
         val builder = OkHttpClient.Builder()
         builder.connectTimeout(CONNECT_TIMEOUT_IN_MS.toLong(), TimeUnit.MILLISECONDS)
             .addInterceptor(requestInterceptor)
@@ -40,7 +40,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    internal fun retrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun retrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.FS_BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
@@ -51,7 +51,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    internal fun fsWebService(retrofit: Retrofit): AccountingApiService {
+    fun fsWebService(retrofit: Retrofit): AccountingApiService {
         return retrofit.create(AccountingApiService::class.java)
     }
 
