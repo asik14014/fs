@@ -1,6 +1,6 @@
-package com.fourseasonsweb.fs.Data
+package com.fourseasonsweb.fs.Data.User
 
-class User {
+class UserModel {
     private var Id: Int = 0
     private var UserName: String? = null
     private var FirstName: String? = null

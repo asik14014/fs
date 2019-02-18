@@ -1,6 +1,6 @@
 package com.fourseasonsweb.fs.Network
 
-import com.fourseasonsweb.fs.Data.User
+import com.fourseasonsweb.fs.Data.User.UserModel
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -10,7 +10,7 @@ interface AccountingApiService {
 
     @POST("api/user/login")
     @FormUrlEncoded
-    fun login(@Field("emial") login: String, @Field("password") password: String): Call<User>
+    fun login(@Field("email") login: String, @Field("password") password: String): Call<UserModel>
 
 
 //    @GET("3/search/movie?language=en-US&page=1")
