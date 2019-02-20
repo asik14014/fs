@@ -1,6 +1,5 @@
 package com.fourseasonsweb.fs.Network
 
-import com.fourseasonsweb.fs.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
@@ -17,10 +16,13 @@ constructor() : Interceptor {
         val originalHttpUrl = original.url()
 
         val url = originalHttpUrl.newBuilder()
-            .addQueryParameter("api_key", BuildConfig.FS_API_KEY)
+            //.addQueryParameter("api_key", BuildConfig.FS_API_KEY)
             .build()
 
-        val request = original.newBuilder().url(url).build()
+        val request = original.newBuilder()
+            .addHeader("Authorization", "Bearer " + token)
+            .url(url)
+            .build()
         return chain.proceed(request)
     }
 }

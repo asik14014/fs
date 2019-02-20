@@ -20,7 +20,8 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
-import com.fourseasonsweb.fs.Data.User.UserModel
+import com.fourseasonsweb.fs.Data.FsPrefferences
+import com.fourseasonsweb.fs.Data.User.LoginResponse
 import com.fourseasonsweb.fs.Network.AccountingApiService
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
@@ -34,10 +35,13 @@ import javax.inject.Inject
 /**
  * A login screen that offers login via email/password.
  */
-class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<UserModel> {
+class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<LoginResponse> {
 
     @Inject
     lateinit var api: AccountingApiService
+
+    @Inject
+    lateinit var prefferences: FsPrefferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +64,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Use
     /**
      * Ошибка запроса
      */
-    override fun onFailure(call: Call<UserModel>, t: Throwable) {
+    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
         showProgress(false)
 
         MaterialDialog(this).show {
@@ -73,7 +77,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Use
     /**
      * Ответ запроса
      */
-    override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+    override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
         showProgress(false)
         if (response.isSuccessful) {
             val result = response.body()

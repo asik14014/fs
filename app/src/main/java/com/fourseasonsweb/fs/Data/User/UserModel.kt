@@ -1,5 +1,8 @@
 package com.fourseasonsweb.fs.Data.User
 
+import dagger.Module
+
+@Module
 class UserModel {
     private var Id: Int = 0
     private var UserName: String? = null
