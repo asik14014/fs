@@ -20,7 +20,7 @@ constructor() : Interceptor {
             .build()
 
         val request = original.newBuilder()
-            .addHeader("Authorization", "Bearer " + token)
+            .addHeader("Authorization", "Bearer " + "")//token
             .url(url)
             .build()
         return chain.proceed(request)

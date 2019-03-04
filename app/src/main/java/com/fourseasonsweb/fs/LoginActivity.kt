@@ -6,6 +6,7 @@ import android.animation.AnimatorListenerAdapter
 import android.annotation.TargetApi
 import android.app.LoaderManager.LoaderCallbacks
 import android.content.CursorLoader
+import android.content.Intent
 import android.content.Loader
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -31,7 +32,6 @@ import retrofit2.Response
 import java.util.*
 import javax.inject.Inject
 
-
 /**
  * A login screen that offers login via email/password.
  */
@@ -40,7 +40,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Log
     @Inject
     lateinit var api: AccountingApiService
 
-    @Inject
     lateinit var prefferences: FsPrefferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +81,8 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Log
         if (response.isSuccessful) {
             val result = response.body()
             if (result != null) {
-                finish()
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
             } else {
                 password.error = getString(R.string.error_incorrect_password)
                 password.requestFocus()

@@ -2,16 +2,12 @@ package com.fourseasonsweb.fs.Data
 
 import android.content.Context
 import android.content.SharedPreferences
-import dagger.Module
-import dagger.Provides
 import javax.inject.Singleton
 
-@Module
 class FsPrefferences(val ctx: Context) {
     private val preference = "FSPref"
     var settings: SharedPreferences? = null
 
-    @Provides
     @Singleton
     fun updatePreferences() {
         settings = ctx.getSharedPreferences(preference, 0)
