@@ -28,7 +28,7 @@ android {
     }
     sourceSets {
         main {
-            java.srcDirs = ['src/main/java', 'src/main/java/com.fourseasonsweb.fs/Journal', 'src/main/java/com/fourseasonsweb/fs/Journal', 'src/main/java/com/fourseasonsweb/fs/Profile', 'src/main/java/com/fourseasonsweb/fs/Record', 'src/main/java/com/fourseasonsweb/fs/Network', 'src/main/java/com/fourseasons/fs/Data', 'src/main/java/com/fourseasonsweb/fs/Data', 'src/main/java/com/fourseasonsweb/fs/Data/User', 'src/main/java/com/fourseasonsweb/com/Data']
+            java.srcDirs = ['src/main/java', 'src/main/java/com.fourseasonsweb.fs/Journal', 'src/main/java/com/fourseasonsweb/fs/Journal', 'src/main/java/com/fourseasonsweb/fs/Profile', 'src/main/java/com/fourseasonsweb/fs/Record', 'src/main/java/com/fourseasonsweb/fs/Network', 'src/main/java/com/fourseasons/fs/Data', 'src/main/java/com/fourseasonsweb/fs/Data', 'src/main/java/com/fourseasonsweb/fs/Data/User', 'src/main/java/com/fourseasonsweb/com/Data', 'src/main/java/com/fourseasonsweb/fs/Data/Journal']
         }
     }
 }
