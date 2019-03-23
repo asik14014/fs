@@ -1,15 +1,17 @@
 package com.fourseasonsweb.fs
 
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.design.widget.Snackbar
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
+
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
+
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -32,7 +34,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         nav_view.setNavigationItemSelectedListener(this)
-
     }
 
     override fun onBackPressed() {

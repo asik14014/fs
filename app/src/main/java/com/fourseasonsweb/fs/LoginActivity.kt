@@ -14,17 +14,16 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.support.design.widget.Snackbar
+import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import com.afollestad.materialdialogs.MaterialDialog
 import com.fourseasonsweb.fs.Data.FsPrefferences
 import com.fourseasonsweb.fs.Data.User.LoginResponse
 import com.fourseasonsweb.fs.Network.AccountingApiService
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -66,11 +65,12 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Log
     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
         showProgress(false)
 
+        /*
         MaterialDialog(this).show {
             title(R.string.dialog_alert_error)
             message(text = t.message)
             positiveButton(R.string.dialog_alert_ok)
-        }
+        }*/
     }
 
     /**
@@ -88,11 +88,12 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Log
                 password.requestFocus()
             }
         } else {
+            /*
             MaterialDialog(this).show {
                 title(R.string.dialog_alert_error)
                 message( text = response.message())
                 positiveButton(R.string.dialog_alert_ok)
-            }
+            }*/
         }
     }
 
