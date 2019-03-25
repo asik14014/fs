@@ -1,14 +1,14 @@
 package com.fourseasonsweb.fs
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 
@@ -64,8 +64,23 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_manage -> {
-
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
             }
+            R.id.nav_profile -> {
+                val intent = Intent(this, ProfileActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_journals -> {
+                val intent = Intent(this, JournalListActivity::class.java)
+                startActivity(intent)
+            }
+
+            R.id.nav_add_record -> {
+                val intent = Intent(this, RecordAddActivity::class.java)
+                startActivity(intent)
+            }
+
             R.id.nav_share -> {
 
             }

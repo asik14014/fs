@@ -19,8 +19,8 @@ class FsPrefferences(val ctx: Context) {
         editor.apply()
     }
 
-    fun getValue(KEY: String) : Boolean{
-        return settings!!.getBoolean(KEY, false)
+    fun getValue(KEY: String) : String {
+        return settings!!.getString(KEY, "")
     }
 
     fun clearPreference() {

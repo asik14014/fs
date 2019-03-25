@@ -23,7 +23,9 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.fourseasonsweb.fs.Data.FsPrefferences
 import com.fourseasonsweb.fs.Data.User.LoginResponse
+import com.fourseasonsweb.fs.Data.User.TokenModel
 import com.fourseasonsweb.fs.Network.AccountingApiService
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,12 +40,43 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Log
 
     @Inject
     lateinit var api: AccountingApiService
-
     lateinit var prefferences: FsPrefferences
+    private val tokenKey: String = "TOKEN"
+
+    private fun openMainActivity(closeThis: Boolean = true) {
+        val intent = Intent(this, HomeActivity::class.java)
+        if (closeThis) finish()
+        startActivity(intent)
+    }
+
+    private fun saveToken(tokenModel: TokenModel) {
+        val gson = Gson()
+        prefferences.saveValue(tokenKey, gson.toJson(tokenModel))
+    }
+
+    private fun getToken() : TokenModel? {
+        val json = prefferences.getValue(tokenKey)
+
+        if (json.isNotEmpty()) {
+            val gson = Gson()
+            val obj = gson.fromJson(json, TokenModel::class.java)
+            return obj
+        }
+        return null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        //Если токен валидный открыть главное окно
+        val tokenModel = getToken()
+        if (tokenModel?.getExpires_in() != null) {
+            val now = Helper.currentDateInLong()
+            val expireDate = tokenModel.getExpires_in()!!
+            if (expireDate < now) openMainActivity()
+        }
+
         // Set up the login form.
         populateAutoComplete()
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
@@ -81,8 +114,8 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Log
         if (response.isSuccessful) {
             val result = response.body()
             if (result != null) {
-                val intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
+                if (result.getToken() != null) saveToken(result.getToken()!!)
+                openMainActivity()
             } else {
                 password.error = getString(R.string.error_incorrect_password)
                 password.requestFocus()
