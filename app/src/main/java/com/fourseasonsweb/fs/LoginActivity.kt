@@ -36,7 +36,7 @@ import javax.inject.Inject
 /**
  * A login screen that offers login via email/password.
  */
-class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<LoginResponse> {
+class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<LoginResponse> { //BaseCallback<LoginResponse>
 
     @Inject
     lateinit var api: AccountingApiService
@@ -68,6 +68,9 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Log
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        prefferences = FsPrefferences(this)
+        prefferences.updatePreferences()
 
         //Если токен валидный открыть главное окно
         val tokenModel = getToken()
@@ -255,7 +258,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Log
             showProgress(true)
 
             val call = api.login(emailStr, passwordStr)
-            call.enqueue(this)
+            //call.enqueue(this)
         }
     }
 

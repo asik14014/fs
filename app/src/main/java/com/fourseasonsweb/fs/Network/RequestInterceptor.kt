@@ -23,6 +23,15 @@ constructor() : Interceptor {
             .addHeader("Authorization", "Bearer " + "")//token
             .url(url)
             .build()
-        return chain.proceed(request)
+
+        val response = chain.proceed(request)
+        if (response.code() == 403) {
+            handleForbiddenResponse()
+        }
+        return response
+    }
+
+    private fun handleForbiddenResponse() {
+        
     }
 }
