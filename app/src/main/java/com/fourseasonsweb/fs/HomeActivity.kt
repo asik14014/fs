@@ -9,11 +9,14 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.fourseasonsweb.fs.Data.FsPrefferences
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    lateinit var prefferences: FsPrefferences
+    private val tokenKey: String = "TOKEN"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +34,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-
-
         nav_view.setNavigationItemSelectedListener(this)
+
+        prefferences = FsPrefferences(this)
+        prefferences.updatePreferences()
     }
 
     override fun onBackPressed() {
@@ -56,6 +60,14 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
             R.id.action_settings -> return true
+            R.id.action_logout -> {
+                prefferences.saveValue(tokenKey, "")
+                val intent = Intent(this, LoginActivity::class.java)
+                this.finish()
+                this.startActivity(intent)
+
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
     }

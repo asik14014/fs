@@ -25,19 +25,16 @@ import com.fourseasonsweb.fs.Data.FsPrefferences
 import com.fourseasonsweb.fs.Data.User.LoginResponse
 import com.fourseasonsweb.fs.Data.User.TokenModel
 import com.fourseasonsweb.fs.Network.AccountingApiService
+import com.fourseasonsweb.fs.Network.BaseCallback
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.util.*
 import javax.inject.Inject
 
 /**
  * A login screen that offers login via email/password.
  */
-class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<LoginResponse> { //BaseCallback<LoginResponse>
-
+class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     @Inject
     lateinit var api: AccountingApiService
     lateinit var prefferences: FsPrefferences
@@ -95,23 +92,11 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Log
         injectDependency()
     }
 
-    /**
-     * Ошибка запроса
-     */
+    /*
     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
         showProgress(false)
-
-        /*
-        MaterialDialog(this).show {
-            title(R.string.dialog_alert_error)
-            message(text = t.message)
-            positiveButton(R.string.dialog_alert_ok)
-        }*/
     }
 
-    /**
-     * Ответ запроса
-     */
     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
         showProgress(false)
         if (response.isSuccessful) {
@@ -124,14 +109,9 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Log
                 password.requestFocus()
             }
         } else {
-            /*
-            MaterialDialog(this).show {
-                title(R.string.dialog_alert_error)
-                message( text = response.message())
-                positiveButton(R.string.dialog_alert_ok)
-            }*/
         }
     }
+    */
 
     /**
      * Callback received when a permissions request has been completed.
@@ -258,8 +238,39 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor>, Callback<Log
             showProgress(true)
 
             val call = api.login(emailStr, passwordStr)
-            //call.enqueue(this)
+
+            call.enqueue(object : BaseCallback<LoginResponse>(this) {
+                override fun onSuccess(response: LoginResponse?) {
+                    handleResponse(response)
+                }
+
+                override fun onFail() {
+                    handleFailResponse()
+                }
+            })
         }
+    }
+
+    private fun handleResponse(response: LoginResponse?) {
+        showProgress(false)
+        if (response != null) {
+            if (response.getToken() != null) saveToken(response.getToken()!!)
+            openMainActivity()
+        } else {
+            password.error = getString(R.string.error_incorrect_password)
+            password.requestFocus()
+        }
+    }
+
+    private fun handleFailResponse() {
+        showProgress(false)
+
+        /*
+        MaterialDialog(this).show {
+            title(R.string.dialog_alert_error)
+            message(text = t.message)
+            positiveButton(R.string.dialog_alert_ok)
+        }*/
     }
 
     private fun isEmailValid(email: String): Boolean {

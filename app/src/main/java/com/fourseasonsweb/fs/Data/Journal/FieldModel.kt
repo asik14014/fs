@@ -10,6 +10,18 @@ class FieldModel {
     private var index: Int? = null
     private var dictionaryList: List<DictionaryModel>? = null
 
+    constructor(id: Int, journalId: Int?, name: String?, type: Short?,
+                order: Short?, isActive: Boolean?, index: Int?, dictList: List<DictionaryModel>?){
+        this.id = id
+        this.journalId = journalId
+        this.name = name
+        this.type = type
+        this.order = order
+        this.isActive = isActive
+        this.index = index
+        this.dictionaryList = dictList
+    }
+
     fun getId(): Int? {
         return id
     }

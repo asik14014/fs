@@ -5,6 +5,12 @@ class JournalModel {
     private var name: String? = null
     private var fieldList: List<FieldModel>? = null
 
+    constructor(id:Int, name: String?, fieldList: List<FieldModel>?) {
+        this.id = id
+        this.name = name
+        this.fieldList = fieldList
+    }
+
     fun getId(): Int? {
         return id
     }

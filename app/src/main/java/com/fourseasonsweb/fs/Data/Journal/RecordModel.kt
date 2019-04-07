@@ -8,6 +8,13 @@ class RecordModel {
     private var userId: Int? = null
     private var registration: Date? = null
 
+    constructor(id:Int, journalId: Int?, userId: Int?, registration: Date?) {
+        this.id = id
+        this.journalId = journalId
+        this.userId = userId
+        this.registration = registration
+    }
+
     fun getId(): Int? {
         return id
     }
