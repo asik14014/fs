@@ -8,7 +8,6 @@ import com.fourseasonsweb.fs.Network.BaseCallback
 import com.fourseasonsweb.fs.ui.recordadd.RecordAddFragment
 import kotlinx.android.synthetic.main.record_add_activity.*
 import org.jetbrains.anko.longToast
-import java.util.*
 import javax.inject.Inject
 
 class RecordAddActivity : AppCompatActivity() {
@@ -37,9 +36,9 @@ class RecordAddActivity : AppCompatActivity() {
 
     private fun createRecordModel() : RecordModel {
         val id : Int = 0
-        val journalId : Int? = null
-        val registration : Date? = null
-        val userId : Int? = null
+        val journalId : Int? = 0
+        val registration : Long? = Helper.currentDateInLong()
+        val userId : Int? = 0
         return RecordModel(id, journalId, userId, registration)
     }
 

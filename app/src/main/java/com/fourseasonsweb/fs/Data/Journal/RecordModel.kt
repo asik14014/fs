@@ -1,14 +1,12 @@
 package com.fourseasonsweb.fs.Data.Journal
 
-import java.util.*
-
 class RecordModel {
     private var id: Int? = null
     private var journalId: Int? = null
     private var userId: Int? = null
-    private var registration: Date? = null
+    private var registration: Long? = null
 
-    constructor(id:Int, journalId: Int?, userId: Int?, registration: Date?) {
+    constructor(id:Int, journalId: Int?, userId: Int?, registration: Long?) {
         this.id = id
         this.journalId = journalId
         this.userId = userId
@@ -39,11 +37,11 @@ class RecordModel {
         this.userId = value
     }
 
-    fun getRegistration(): Date? {
+    fun getRegistration(): Long? {
         return registration
     }
 
-    fun setRegistration(value: Date?) {
+    fun setRegistration(value: Long?) {
         this.registration = value
     }
 }
